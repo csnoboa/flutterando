@@ -10,10 +10,8 @@ class _LoginPageState extends State<LoginPage> {
   String email = '';
   String password = '';
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        body: SingleChildScrollView(
+  Widget _body() {
+    return SingleChildScrollView(
       child: SizedBox(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
@@ -25,8 +23,7 @@ class _LoginPageState extends State<LoginPage> {
               Container(
                 width: 150,
                 height: 150,
-                child: Image.network(
-                    'https://upload.wikimedia.org/wikipedia/commons/a/ab/Logo_TV_2015.png'),
+                child: Image.asset('assets/images/logo.png'),
               ),
               Container(
                 height: 20,
@@ -63,6 +60,19 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ),
       ),
-    ));
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        body: Stack(children: [
+      SizedBox(
+          height: MediaQuery.of(context).size.height,
+          child:
+              Image.asset('assets/images/background.jfif', fit: BoxFit.cover)),
+      Container(color: Colors.black.withOpacity((0.2))),
+      _body()
+    ]));
   }
 }
