@@ -14,27 +14,64 @@ class HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Home Page'),
-        actions: [CustomSwitch()],
-      ),
-      body: Container(
-          child: Center(
+      drawer: Drawer(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('Contador: $counter'),
-            CustomSwitch(),
+            UserAccountsDrawerHeader(
+              currentAccountPicture: ClipOval(
+                child: Image.network(
+                  'https://i.pinimg.com/280x280_RS/33/74/bd/3374bd4ca90568d7f940253322433b08.jpg',
+                ),
+              ),
+              accountName: Text('Caique'),
+              accountEmail: Text('caique2noboa@gmail.com'),
+            ),
+            ListTile(
+              title: Text('Home'),
+              subtitle: Text('Inicio'),
+              leading: Icon(Icons.home),
+              onTap: () {
+                debugPrint('home');
+              },
+            ),
+            ListTile(
+              title: Text('Logout'),
+              subtitle: Text('Finalizar sessão'),
+              leading: Icon(Icons.logout),
+              onTap: () {
+                Navigator.of(context).pushReplacementNamed('/');
+              },
+            ),
           ],
         ),
-      )),
+      ),
+      appBar: AppBar(
+        title: Text('Home Page'),
+        actions: [
+          CustomSwitch(),
+        ],
+      ),
+      body: Container(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('Contador: $counter'),
+              CustomSwitch(),
+            ],
+          ),
+        ),
+      ),
       floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            setState(() {
+        onPressed: () {
+          setState(
+            () {
               counter++;
-            });
-          },
-          child: Icon(Icons.add)),
+            },
+          );
+        },
+        child: Icon(Icons.add),
+      ),
     );
   }
 }
